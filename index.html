@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Link CSS -->
+    <link href="./dist/css/style.css" rel="stylesheet" />
+
+    <!-- Font saya -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Alpine js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <title>Curriculum Vitae</title>
+  </head>
+  <body class="bg-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-blur backdrop-blur-lg fixed z-10 top-0 w-screen shadow-2xl" x-data="{ isOpen: false }">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button
+              type="button"
+              @click="isOpen = !isOpen"
+              class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <!--
+                  Icon when menu is closed.
+      
+                  Menu open: "hidden", Menu closed: "block"
+                -->
+              <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              <!--
+                  Icon when menu is open.
+      
+                  Menu open: "block", Menu closed: "hidden"
+                -->
+              <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex shrink-0 items-center">
+              <img class="h-8 w-auto rounded-full" src="./dist/img/Conan.jpg" alt="Your Company" />
+            </div>
+            <div class="hidden sm:ml-6 sm:block">
+              <div class="flex space-x-4" x-data="{ active: 'about' }">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a
+                  href="#about"
+                  @click="active = 'about'"
+                  :class="{
+                    'bg-gray-900 text-white': active === 'about', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'about'
+                    }"
+                  class="page-scroll rounded-md px-3 py-2 text-sm font-medium"
+                  >About</a
+                >
+                <a
+                  href="#experience"
+                  @click="active = 'experience'"
+                  :class="{'bg-gray-900 text-white': active === 'experience', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'experience'}"
+                  class="page-scroll rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Experience</a
+                >
+                <a
+                  href="#education"
+                  @click="active = 'education'"
+                  :class="{'bg-gray-900 text-white': active === 'education', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'education'}"
+                  class="page-scroll rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Education</a
+                >
+                <a
+                  href="#contact"
+                  @click="active = 'contact'"
+                  :class="{'bg-gray-900 text-white': active === 'contact', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'contact'}"
+                  class="page-scroll rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  >Contact</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div
+        x-show="isOpen"
+        @click.away="isOpen = false"
+        x-transition:enter="transition ease-out duration-500 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75 transform"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="sm:hidden"
+        id="mobile-menu"
+      >
+        <div class="space-y-1 px-2 pt-2 pb-3" x-data="{ active: 'about' }">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a
+            href="#about"
+            @click="active = 'about'"
+            :class="{
+            'bg-gray-900 text-white': active === 'about', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'about'
+            }"
+            class="page-scroll block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page"
+            >About</a
+          >
+          <a
+            href="#experience"
+            @click="active = 'experience'"
+            :class="{
+            'bg-gray-900 text-white': active === 'experience', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'experience'
+            }"
+            class="page-scroll block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Experience</a
+          >
+          <a
+            href="#education"
+            @click="active = 'education'"
+            :class="{
+            'bg-gray-900 text-white': active === 'education', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'education'
+            }"
+            class="page-scroll block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Education</a
+          >
+          <a
+            href="#contact"
+            @click="active = 'contact'"
+            :class="{
+            'bg-gray-900 text-white': active === 'contact', 'text-gray-300 hover:bg-gray-700 hover:text-white': active !== 'contact'
+            }"
+            class="page-scroll block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main -->
+    <div class="bg-gray-200 w-[90%] max-w-[700px] mx-auto mt-[100px]">
+      <div id="about">
+        <h1 class="header-style">About</h1>
+        <img src="./dist/img/profile.png" class="w-[200px] h-[200px] object-cover object-[0_20px] mx-auto rounded-full border-2 border-gray-400" alt="" />
+        <section class="p-[2rem]">
+          <h1 class="font-bold text-3xl mb-1">Hello👋, I'm Delrico</h1>
+          <p data-aos="fade-up" data-aos-offset="50" data-aos-duration="1000">
+            I am a student from the University of North Sumatra with the Information Technology study program. I love coding and I am enthusiastic to apply my knowledge and skills in a dynamic environment and contribute to the field web
+            development. With a logical and structured approach, I always look for efficient and effective solutions. I believe that a combination of deep analysis, logical thinking and strong technical understanding is the key to creating
+            impactful innovation.
+          </p>
+          <div class="before:content-[''] before:block before:w-[100%] before:h-[2px] before:mx-auto before:bg-slate-400 mt-8">
+            <h1 class="mt-2 flex items-center gap-2 text-lg text-gray-500"><i class="bx bx-user-circle text-2xl"></i> Full Name :</h1>
+            <p data-aos="fade-left" data-aos-duration="700">Delrico Lie</p>
+            <h1 class="flex items-center gap-2 text-lg text-gray-500 mt-2"><i class="bx bxs-envelope text-2xl"></i> Email :</h1>
+            <p data-aos="fade-left" data-aos-duration="700" data-aos-delay="300">delricolie111@gmail.com</p>
+            <h1 class="flex items-center gap-2 text-lg text-gray-500 mt-2"><i class="bx bxl-github text-2xl"></i> Github :</h1>
+            <a href="https://github.com/Ocirled" target="_blank" class="underline text-indigo-500" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600">@Ocirled</a>
+          </div>
+
+          <div class="social-media mt-3">
+            <a href="https://www.instagram.com/delricoo_?igsh=Y2Q1aGhpYWY0OGNl" target="_blank" class="hover:text-gray-800">
+              <i class="bx bxl-instagram text-3xl" data-aos="fade-up" data-aos-duration="700"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/delrico-lie-8715b7284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="hover:text-gray-800">
+              <i class="bx bxl-linkedin text-3xl ml-2" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300"></i>
+            </a>
+          </div>
+
+          <h3 class="sub-border mt-6">My Skills <span class="span-border"></span></h3>
+          <div class="slider overflow-hidden w-[100%] h-[70px] mx-auto mt-8">
+            <div class="list flex w-[100%] min-w-[calc(100px * 8)] relative">
+              <div style="--position: 1" class="item absolute left-[100%] w-[75px] md:w-[80px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/html.png" class="w-[100%] h-[70px] md:h-[75px] grayscale-100 hover:grayscale-0 duration-300 p-[.8rem] md:p-0" alt="" />
+                <!-- <div id="tooltip-bottom" role="tooltip" class="absolute z-10 visible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                  HTML
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div> -->
+              </div>
+              <div style="--position: 2" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/css3.png" class="img-gray" alt="" />
+              </div>
+              <div style="--position: 3" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/bootstrap.png" class="img-gray" alt="" />
+              </div>
+              <div style="--position: 4" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/php.png" class="img-gray" alt="" />
+              </div>
+              <div style="--position: 5" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/tailwindcss.png" class="img-gray" alt="" />
+              </div>
+              <div style="--position: 6" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/js.png" class="img-gray" alt="" />
+              </div>
+              <div style="--position: 7" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/github.png" class="img-gray" alt="" />
+              </div>
+              <div style="--position: 8" class="item absolute left-[100%] w-[70px] h-[70px] flex items-center animate-(--animate-slider)">
+                <img src="./dist/img//skills/c++.png" class="img-gray" alt="" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Experience -->
+      <div class="p-[2rem] bg-gray-900 text-white" id="experience">
+        <h1 class="header-style border-white pb-1">Experience</h1>
+
+        <h1 class="sub-border after:bg-white">Organization <span class="span-border"></span></h1>
+
+        <div class="border-l-2 border-slate-500 mt-12 h-[1050px]">
+          <div class="p-[1rem] relative">
+            <span class="block after:content-[''] after:block after:w-[18px] after:h-[18px] after:rounded-full after:bg-slate-400 absolute -top-1 -left-[10px]"></span>
+            <h1 class="text-1xl font-semibold">Generasi Muda Vihara Sammidha Bhagya</h1>
+            <p class="text-sm" data-aos="fade-left" data-aos-duration="700">Des 2023 - Aug 2024</p>
+            <p class="text-sm font-medium mb-3">Media Communication</p>
+
+            <p data-aos="fade-up" data-aos-duration="700">
+              Responsible for the production and management of a live streaming event on YouTube. acted as MC for a gaming event at the monastery, This experience has helped me develop my communication skills, event management, and
+              effective use of digital technology.
+            </p>
+
+            <div class="relative mt-3 max-w-[350px] mx-auto">
+              <!-- Kanan  -->
+              <img src="./dist/img/exp/gmvsb-1.jpg" class="absolute sm:w-[200px] w-[120px] right-[50px] top-[10px] sm:-right-[50px] hover:scale-125 duration-300 hover:z-[3]" alt="" data-aos="fade-left" data-aos-duration="700" />
+              <!-- Tengah -->
+              <img src="./dist/img/exp/gmvsb-5.jpg" class="absolute sm:w-[200px] w-[150px] left-[95px] top-[50px] z-[2] hover:scale-150 duration-300" alt="" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="1200" />
+              <!-- Kiri -->
+              <img src="./dist/img/exp/gmvsb-3.jpg" class="absolute sm:w-[200px] w-[120px] sm:-left-4 left-9 hover:scale-125 duration-300 hover:z-[3]" alt="" data-aos="fade-right" data-aos-duration="700" data-aos-delay="200" />
+              <!-- Bawah kiri -->
+              <img src="./dist/img/exp/gmvsb-4.jpg" class="absolute sm:w-[200px] w-[120px] top-[120px] left-5 hover:scale-125 duration-300 hover:z-[3]" alt="" data-aos="fade-up-right" data-aos-duration="700" data-aos-delay="400" />
+              <!-- Bawah kanan -->
+              <img
+                src="./dist/img/exp/gmvsb-2.jpg"
+                class="absolute sm:w-[200px] w-[120px] right-[20px] top-[125px] hover:scale-125 duration-300 hover:z-[3] sm:-right-5"
+                alt=""
+                data-aos="fade-up-left"
+                data-aos-duration="700"
+                data-aos-delay="600"
+              />
+            </div>
+          </div>
+          <div class="p-[1rem] mt-[270px] relative">
+            <span class="block after:content-[''] after:block after:w-[18px] after:h-[18px] after:rounded-full after:bg-slate-400 absolute -top-1 -left-[10px]"></span>
+            <h1 class="text-1xl font-semibold">Keluarga Mahasiswa Buddhis</h1>
+            <p class="text-sm">Aug 2024 - Now</p>
+            <p class="text-sm font-medium mb-3">Faculty Coordinator</p>
+
+            <p>
+              Involvement in organizational activities will broaden my horizons, improve my interpersonal skills, and build networks that will benefit me in the future. With great curiosity and renewed vigor, I continue to explore various
+              communities that can support my academic and professional growth.
+            </p>
+
+            <div class="relative mt-3 max-w-[380px] mx-auto">
+              <!-- Kanan  -->
+              <img src="./dist/img/exp/kmb-1.jpg" class="absolute sm:w-[200px] w-[120px] right-[40px] top-[10px] sm:-right-[30px] hover:scale-125 duration-300 hover:z-[3]" alt="" data-aos="fade-left" data-aos-duration="700" />
+              <!-- Tengah -->
+              <img src="./dist/img/exp/kmb-5.jpg" class="absolute sm:w-[200px] w-[170px] left-[90px] top-[50px] z-[2] hover:scale-150 duration-300" alt="" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="1200" />
+              <!-- Kiri -->
+              <img src="./dist/img/exp/kmb-3.jpg" class="absolute sm:w-[200px] w-[120px] left-10 sm:left-0 hover:scale-125 duration-300 hover:z-[3]" alt="" data-aos="fade-right" data-aos-duration="700" data-aos-delay="200" />
+              <!-- Bawah kiri -->
+              <img src="./dist/img/exp/kmb-4.jpg" class="absolute sm:w-[200px] w-[120px] top-[120px] left-10 sm:left-3 hover:scale-125 duration-300 hover:z-[3]" alt="" data-aos="fade-up-right" data-aos-duration="700" data-aos-delay="400" />
+              <!-- Bawah kanan -->
+              <img
+                src="./dist/img/exp/kmb-2.jpg"
+                class="absolute sm:w-[200px] w-[120px] right-[20px] top-[100px] sm:-right-10 hover:scale-125 duration-300 hover:z-[3]"
+                alt=""
+                data-aos="fade-up-left"
+                data-aos-duration="700"
+                data-aos-delay="600"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+
+      <div class="p-[2rem]" id="education">
+        <h1 class="header-style">Education</h1>
+
+        <div class="max-w-[400px] mx-auto mt-20 relative">
+          <span class="block after:content-[''] after:block after:w-[2px] after:h-[300px] after:bg-slate-400 absolute -top-[40px] left-1/2 -translate-x-1/2"></span>
+          <span class="block after:content-[''] after:block after:w-[15px] after:h-[15px] after:rounded-full after:bg-slate-400 absolute -top-[40px] left-1/2 -translate-x-1/2"></span>
+          <div class="bg-gray-900 text-white text-center p-[.5rem] relative">
+            <h1 class="font-semibold">Methodist Immanuel Perdagangan</h1>
+            <p class="mt-2" data-aos="fade-up" data-aos-duration="500">2010 - 2014</p>
+            <span class="absolute left-0 top-0 w-[50px] h-[100%] flex items-center justify-center bg-gray-400"><i class="bx bxs-graduation text-2xl"></i></span>
+          </div>
+          <div class="bg-gray-900 text-white text-center p-[.5rem] relative mt-8">
+            <h1 class="font-semibold">Perguruan Swasta Sultan Agung</h1>
+            <p class="mt-2">Natural Science</p>
+            <p data-aos="fade-up" data-aos-duration="500">2014 - 2024</p>
+            <span class="absolute left-0 top-0 w-[50px] h-[100%] flex items-center justify-center bg-gray-400"><i class="bx bxs-graduation text-2xl"></i></span>
+          </div>
+          <div class="bg-gray-900 text-white text-center p-[.5rem] relative mt-8">
+            <h1 class="font-semibold">Universitas Sumatera Utara</h1>
+            <p class="mt-2">S-1 Information Technology</p>
+            <p data-aos="fade-up" data-aos-duration="500" data-aos-offset="50">2024 - Now</p>
+            <span class="absolute left-0 top-0 w-[50px] h-[100%] flex items-center justify-center bg-gray-400"><i class="bx bxs-graduation text-2xl"></i></span>
+          </div>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div class="mb-10" id="contact">
+        <div class="bg-gray-900 px-6 py-2 sm:py-4 lg:px-8 mt-8 text-white">
+          <h1 class="header-style">Contact</h1>
+          <div class="mx-auto max-w-2xl text-center"></div>
+          <form action="#" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+              <div>
+                <label for="first-name" class="block text-sm/6 font-semibold">First name</label>
+                <div class="mt-2.5">
+                  <input
+                    type="text"
+                    name="first-name"
+                    id="first-name"
+                    autocomplete="given-name"
+                    class="block w-full rounded-md bg-white px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
+                  />
+                </div>
+              </div>
+              <div>
+                <label for="last-name" class="block text-sm/6 font-semibold">Last name</label>
+                <div class="mt-2.5">
+                  <input
+                    type="text"
+                    name="last-name"
+                    id="last-name"
+                    autocomplete="family-name"
+                    class="block w-full rounded-md bg-white px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
+                  />
+                </div>
+              </div>
+              <div class="sm:col-span-2">
+                <label for="company" class="block text-sm/6 font-semibold">Company</label>
+                <div class="mt-2.5">
+                  <input
+                    type="text"
+                    name="company"
+                    id="company"
+                    autocomplete="organization"
+                    class="block w-full rounded-md bg-white px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
+                  />
+                </div>
+              </div>
+              <div class="sm:col-span-2">
+                <label for="email" class="block text-sm/6 font-semibold">Email</label>
+                <div class="mt-2.5">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    autocomplete="off"
+                    class="block w-full rounded-md bg-white px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
+                  />
+                </div>
+              </div>
+
+              <div class="sm:col-span-2">
+                <label for="message" class="block text-sm/6 font-semibold">Message</label>
+                <div class="mt-2.5">
+                  <textarea
+                    name="message"
+                    id="message"
+                    rows="4"
+                    class="block w-full rounded-md bg-white px-3.5 py-2 text-base outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-gray-400"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="mt-10">
+              <button
+                type="submit"
+                class="block w-full rounded-md bg-gray-400 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-400"
+              >
+                Let's talk
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      AOS.init();
+    </script>
+
+    <script src="./dist/js/main.js"></script>
+  </body>
+</html>

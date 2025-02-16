@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --quantity-items: 8;
+}
+
+@theme {
+    --font-poppins: "Poppins", "sans-serif";
+    --color-blur: rgba(30, 41, 57, .5);
+
+    --animate-slider: slider 4s linear infinite;
+
+    @keyframes slider {
+      from {
+        left:100%;
+      } to {
+        left: calc(100px * -1);
+      }
+    }
+  }
+
+  .slider {
+    mask-image: linear-gradient(to right, transparent, #000 , transparent);
+  }
+
+  .slider:hover .item {
+    animation-play-state: paused !important;
+  }
+
+  .slider .list .item {
+    animation-delay: calc((4s / var(--quantity-items)) * (var(--position) - 1));
+  }
+
+.header-style {
+  @apply font-bold text-center text-2xl relative border-b-4  m-10 after:content-[''] after:block after:bg-gray-400 after:w-[10%] after:h-[3px] after:absolute after:bottom-[-15px] after:left-1/2 after:-translate-x-1/2;
+}
+
+.sub-border{
+  @apply relative w-fit font-semibold text-2xl after:content-[''] after:block after:w-[70%] after:h-[2px];
+}
+
+.span-border {
+  @apply after:content-[''] after:block after:bg-gray-400 after:w-[50%] after:h-[2px] after:absolute after:bottom-[-10px] after:right-0;
+}
+
+.img-gray {
+  @apply w-[100%] h-[60px] p-[.8rem] md:p-0 grayscale-100 hover:grayscale-0 duration-300;
+}
