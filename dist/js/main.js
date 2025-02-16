@@ -1,3 +1,4 @@
+// Navbar scroll
 const tabsNav = document.querySelectorAll('.page-scroll').forEach(function(el) {
     el.addEventListener('click', function(e) {
         e.preventDefault();
@@ -10,3 +11,4 @@ const tabsNav = document.querySelectorAll('.page-scroll').forEach(function(el) {
         })
     })
 })
+
