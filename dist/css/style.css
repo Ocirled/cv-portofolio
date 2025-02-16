@@ -800,6 +800,9 @@
     border-left-style: var(--tw-border-style);
     border-left-width: 2px;
   }
+  .border-black {
+    border-color: var(--color-black);
+  }
   .border-gray-400 {
     border-color: var(--color-gray-400);
   }
@@ -1100,6 +1103,18 @@
     &::after {
       content: var(--tw-content);
       border-radius: calc(infinity * 1px);
+    }
+  }
+  .after\:border-black {
+    &::after {
+      content: var(--tw-content);
+      border-color: var(--color-black);
+    }
+  }
+  .after\:bg-black {
+    &::after {
+      content: var(--tw-content);
+      background-color: var(--color-black);
     }
   }
   .after\:bg-slate-400 {
