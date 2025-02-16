@@ -44,7 +44,7 @@
 }
 
 .img-gray {
-  @apply w-[100%] h-[60px] p-[.7rem] md:p-0 grayscale-100 hover:grayscale-0 duration-300;
+  @apply w-[100%] h-[60px] p-[.8rem] md:p-0 grayscale-100 hover:grayscale-0 duration-300;
 }
 
 
